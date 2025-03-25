@@ -19,7 +19,7 @@ jobs:
 
       # Paso 2: Configurar Docker Buildx (requerido para construir imágenes multi-plataforma)
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2  # Actualiza a la versión más reciente
+        uses: docker/setup-buildx-action@v2
 
       # Paso 3: Iniciar sesión en GitHub Container Registry
       - name: Log in to GitHub Container Registry
@@ -27,7 +27,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_TOKEN }}  # Usamos el token secreto que agregaste en GitHub Secrets
+          password: ${{ secrets.GHCR_TOKEN }}
 
       # Paso 4: Construir la imagen Docker
       - name: Build Docker image
@@ -54,7 +54,15 @@ jobs:
         with:
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
-      # Paso 3: Desplegar en Kubernetes
+      # Paso 3: Debug: Mostrar configuración de kubectl
+      - name: Debug kubectl config
+        run: |
+          echo "Mostrando configuración de kubectl..."
+          kubectl config view
+          kubectl config current-context
+          kubectl get nodes
+
+      # Paso 4: Desplegar en Kubernetes
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f k8s/deployment.yaml
