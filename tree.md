@@ -23,7 +23,10 @@ tienda/
 ├── k8s/
 │   ├── deployment.yaml                # Configuración de Kubernetes para desplegar la app
 │   ├── service.yaml                   # Configuración de servicio en Kubernetes
-│   └── prometheus-flask-exporter.yaml # Configuración de Kubernetes para el exporter de métricas Flask
+│   ├── prometheus-flask-exporter.yaml # Configuración de Kubernetes para el exporter de métricas Flask
+│   └── elk/
+│       ├── deployment.yaml            # Despliegue de Elasticsearch, Kibana y Logstash
+│       └── service.yaml               # Servicios de Elasticsearch, Kibana y Logstash
 ├── helm/
 │   ├── prometheus/
 │   │   └── values.yaml                # Configuración de Helm para Prometheus
