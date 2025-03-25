@@ -1,4 +1,4 @@
-tienda_8_2/
+tienda/
 ├── aplicacion/
 │   ├── app.py                         # Tu aplicación Flask principal
 │   ├── config.py                      # Configuración de la app Flask
@@ -22,12 +22,11 @@ tienda_8_2/
 │       └── ci.yml                     # Workflow de GitHub Actions
 ├── k8s/
 │   ├── deployment.yaml                # Configuración de Kubernetes para desplegar la app
-│   └── service.yaml                   # Configuración de servicio en Kubernetes
+│   ├── service.yaml                   # Configuración de servicio en Kubernetes
+│   └── prometheus-flask-exporter.yaml # Configuración de Kubernetes para el exporter de métricas Flask
 ├── helm/
-│   ├── zabbix/
-│   │   └── values.yaml                # Configuración de Helm para Zabbix
-│   └── elk/
-│       ├── elasticsearch-values.yaml  # Configuración de Helm para Elasticsearch
-│       ├── kibana-values.yaml         # Configuración de Helm para Kibana
-│       └── logstash-values.yaml       # Configuración de Helm para Logstash
+│   ├── prometheus/
+│   │   └── values.yaml                # Configuración de Helm para Prometheus
+│   ├── grafana/
+│   │   └── values.yaml                # Configuración de Helm para Grafana
 └── README.md                          # Descripción del proyecto
