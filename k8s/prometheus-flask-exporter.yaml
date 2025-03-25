@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-flask-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-flask-exporter
+  template:
+    metadata:
+      labels:
+        app: prometheus-flask-exporter
+    spec:
+      containers:
+        - name: prometheus-flask-exporter
+          image: prom/prometheus-flask-exporter
+          ports:
+            - containerPort: 8000
