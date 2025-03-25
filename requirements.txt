@@ -1,12 +1,11 @@
-gunicorn 
-psycopg2
-Werkzeug
+Flask==2.0.2
+gunicorn
+psycopg2-binary  # Usualmente se usa psycopg2-binary en lugar de psycopg2
+Werkzeug==2.0.2  
 Flask-Bootstrap
 Flask-Script
 Flask-WTF
-Flask-Sqlalchemy
+Flask-SQLAlchemy
 WTForms
 Flask-Login
-Flask==2.0.2
 prometheus-flask-exporter==0.18.0
-
