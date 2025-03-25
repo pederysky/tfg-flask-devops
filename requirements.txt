@@ -1,0 +1,12 @@
+gunicorn 
+psycopg2
+Werkzeug
+Flask-Bootstrap
+Flask-Script
+Flask-WTF
+Flask-Sqlalchemy
+WTForms
+Flask-Login
+Flask==2.0.2
+prometheus-flask-exporter==0.18.0
+
