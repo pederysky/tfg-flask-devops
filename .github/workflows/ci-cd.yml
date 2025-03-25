@@ -19,7 +19,7 @@ jobs:
 
       # Paso 2: Configurar Docker Buildx (requerido para construir imágenes multi-plataforma)
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2  # Actualiza a la versión más reciente
 
       # Paso 3: Iniciar sesión en GitHub Container Registry
       - name: Log in to GitHub Container Registry
