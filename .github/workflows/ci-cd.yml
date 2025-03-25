@@ -17,7 +17,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      # Paso 2: Configurar Docker Buildx (requerido para construir imágenes multi-plataforma)
+      # Paso 2: Configurar Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -48,21 +48,29 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      # Paso 2: Configurar kubectl para interactuar con tu clúster de Kubernetes
-      - name: Set up Kubernetes
-        uses: azure/setup-kubectl@v1
-        with:
-          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+      # Paso 2: Instalar kubectl
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
 
-      # Paso 3: Debug: Mostrar configuración de kubectl
+      # Paso 3: Configurar kubeconfig
+      - name: Configure kubeconfig
+        run: |
+          echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
+          export KUBECONFIG=$PWD/kubeconfig.yaml
+          echo "KUBECONFIG=$PWD/kubeconfig.yaml" >> $GITHUB_ENV
+
+      # Paso 4: Debug: Verificar conexión con Kubernetes
       - name: Debug kubectl config
         run: |
-          echo "Mostrando configuración de kubectl..."
+          echo "Verificando configuración de kubectl..."
           kubectl config view
           kubectl config current-context
           kubectl get nodes
 
-      # Paso 4: Desplegar en Kubernetes
+      # Paso 5: Desplegar en Kubernetes
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f k8s/deployment.yaml
