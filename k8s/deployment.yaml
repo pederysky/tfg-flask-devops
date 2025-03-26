@@ -17,3 +17,5 @@ spec:
           image: ghcr.io/pederysky/tfg_1/flask_tienda:latest
           ports:
             - containerPort: 5000
+      imagePullSecrets:
+        - name: github-registry-secret
