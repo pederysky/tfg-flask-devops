@@ -19,4 +19,4 @@ RUN pip install -v --no-cache-dir -r requirements.txt || (tail -n 10 /root/.pip/
 EXPOSE 5000
 
 # Comando para ejecutar la aplicación Flask
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "aplicacion.app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
