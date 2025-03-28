@@ -6,10 +6,11 @@ WORKDIR /app
 
 # Copiamos los archivos de la aplicación al contenedor
 COPY ./aplicacion /app/aplicacion
+COPY ./app.py /app/
 COPY ./requirements.txt /app/
 
 # Verificamos que los archivos se copiaron correctamente
-RUN ls -la /app/aplicacion  # Esto te ayudará a verificar si los archivos están en el lugar correcto
+RUN ls -la /app  # Verificar los archivos copiados en el directorio /app
 
 # Instalamos las dependencias del archivo requirements.txt con logs detallados
 RUN pip install -v --no-cache-dir -r requirements.txt || (tail -n 10 /root/.pip/pip.log && exit 1)
@@ -18,4 +19,4 @@ RUN pip install -v --no-cache-dir -r requirements.txt || (tail -n 10 /root/.pip/
 EXPOSE 5000
 
 # Comando para ejecutar la aplicación Flask
-CMD ["python", "/app/aplicacion/app.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "aplicacion.app:app"]
