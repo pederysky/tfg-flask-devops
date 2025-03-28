@@ -5,8 +5,11 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copiamos los archivos de la aplicación al contenedor
-COPY ./aplicacion /app
+COPY ./aplicacion /app/aplicacion
 COPY ./requirements.txt /app/
+
+# Verificamos que los archivos se copiaron correctamente
+RUN ls -la /app/aplicacion  # Esto te ayudará a verificar si los archivos están en el lugar correcto
 
 # Instalamos las dependencias del archivo requirements.txt con logs detallados
 RUN pip install -v --no-cache-dir -r requirements.txt || (tail -n 10 /root/.pip/pip.log && exit 1)
@@ -15,4 +18,4 @@ RUN pip install -v --no-cache-dir -r requirements.txt || (tail -n 10 /root/.pip/
 EXPOSE 5000
 
 # Comando para ejecutar la aplicación Flask
-CMD ["python", "aplicacion/app.py"]
+CMD ["python", "/app/aplicacion/app.py"]
