@@ -94,7 +94,9 @@ jobs:
       
       - name: Deploy ELK Stack
         run: |
-          kubectl apply -f k8s/elk/ -n logging
-          kubectl rollout status deployment elk-stack -n logging
+          kubectl apply -f k8s/elk/deployment.yaml -n logging
+          kubectl apply -f k8s/elk/service.yaml -n logging
+          kubectl apply -f k8s/elk/elasticsearch-pvc.yaml -n logging
+          kubectl rollout status deployment elasticsearch -n logging
           kubectl get pods -n logging
 
