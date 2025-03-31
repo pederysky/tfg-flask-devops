@@ -58,13 +58,23 @@ jobs:
           kubectl config current-context
           kubectl get nodes
 
-      - name: Deploy to Kubernetes
+      - name: Deploy Flask App
         run: |
           kubectl apply -f k8s/deployment.yaml
           kubectl apply -f k8s/service.yaml
-          
-      - name: Expose service in Minikube
+
+      - name: Deploy Grafana with Helm
         run: |
-          minikube service flask-tienda-service --url
+          helm upgrade --install grafana grafana \
+            --repo https://grafana.github.io/helm-charts \
+            --namespace monitoring --create-namespace \
+            -f helm/grafana/values.yaml
+
+      - name: Deploy Prometheus with Helm
+        run: |
+          helm upgrade --install prometheus prometheus \
+            --repo https://prometheus-community.github.io/helm-charts \
+            --namespace monitoring --create-namespace \
+            -f helm/prometheus/values.yaml
 
 
