@@ -62,4 +62,12 @@ jobs:
         run: |
           kubectl apply -f k8s/deployment.yaml
           kubectl apply -f k8s/service.yaml
+          kubectl rollout status deployment flask-tienda
+          kubectl get pods -o wide
+          kubectl get services
+          
+      - name: Expose service in Minikube
+        run: |
+          minikube service flask-tienda-service --url
+
 
