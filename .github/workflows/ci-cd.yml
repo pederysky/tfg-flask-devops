@@ -32,7 +32,7 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push ghcr.io/${{ github.repository }}/flask_tienda:latest
+          docker push ghcr.io/pederysky/tfg_1/flask_tienda:latest
 
   deploy:
     runs-on: ubuntu-24.04
