@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: logstash-service
+spec:
+  ports:
+    - port: 5044
+    - port: 9600
+  selector:
+    app: logstash
