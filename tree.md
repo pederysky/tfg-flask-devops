@@ -19,7 +19,7 @@ tienda/
 ├── requirements.txt                   # Dependencias de la app Flask
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                     # Workflow de GitHub Actions
+│       └── ci/cd.yml                     # Workflow de GitHub Actions
 ├── k8s/
 │   ├── deployment.yaml                # Configuración de Kubernetes para desplegar la app
 │   ├── service.yaml                   # Configuración de servicio en Kubernetes
