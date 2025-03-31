@@ -28,7 +28,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}/flask_tienda:latest .
+          docker build -t ghcr.io/pederysky/tfg_1/flask_tienda:latest .
 
       - name: Push Docker image
         run: |
