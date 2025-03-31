@@ -11,8 +11,13 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 import os
 import json 
 
+#Nuevo
+from prometheus_flask_exporter import PrometheusMetrics
+
 
 app = Flask(__name__)
+#Nuevo
+metrics = PrometheusMetrics(app)
 app.config.from_object(config)
 Bootstrap(app)
 db = SQLAlchemy(app)
