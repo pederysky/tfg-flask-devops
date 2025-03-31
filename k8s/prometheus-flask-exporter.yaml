@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-flask-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-flask-exporter
+  template:
+    metadata:
+      labels:
+        app: prometheus-flask-exporter
+    spec:
+      containers:
+        - name: prometheus-flask-exporter
+          image: ghcr.io/pederysky/tfg_1/flask_tienda:latest  # La imagen de tu aplicación Flask
+          ports:
+            - containerPort: 5000  # El puerto en el que la app Flask está expuesta
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
