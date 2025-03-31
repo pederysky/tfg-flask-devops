@@ -43,38 +43,50 @@ jobs:
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
-
+      
+      - name: Install Helm
+        run: |
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+          chmod +x get_helm.sh
+          ./get_helm.sh
+          echo "export PATH=/usr/local/bin:\$PATH" >> ~/.bashrc
+          echo "export PATH=/usr/local/bin:\$PATH" >> ~/.profile
+          echo "export PATH=/usr/local/bin:\$PATH" >> $GITHUB_ENV
+          source ~/.bashrc
+          helm version
+      
       - name: Configure kubeconfig
         run: |
           mkdir -p $HOME/.kube
           echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
           export KUBECONFIG=$HOME/.kube/config
           echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
-
+      
       - name: Debug kubectl config
         run: |
           echo "Verificando configuración de kubectl..."
           kubectl config view
           kubectl config current-context
           kubectl get nodes
-
+      
       - name: Deploy Flask App
         run: |
           kubectl apply -f k8s/deployment.yaml
           kubectl apply -f k8s/service.yaml
-
+      
       - name: Deploy Grafana with Helm
         run: |
           helm upgrade --install grafana grafana \
             --repo https://grafana.github.io/helm-charts \
             --namespace monitoring --create-namespace \
             -f helm/grafana/values.yaml
-
+      
       - name: Deploy Prometheus with Helm
         run: |
           helm upgrade --install prometheus prometheus \
             --repo https://prometheus-community.github.io/helm-charts \
             --namespace monitoring --create-namespace \
             -f helm/prometheus/values.yaml
+
 
 
