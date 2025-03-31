@@ -3,7 +3,7 @@
 # Definir las variables
 GHCR_SERVER="ghcr.io"
 GHCR_USERNAME="pederysky"
-GHCR_PASSWORD="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"
+GHCR_PASSWORD="Aqui va el GHCR_TOKEN"
 GHCR_EMAIL="pedroegeaortega@gmail.com"
 IMAGE_NAME="ghcr.io/pederysky/tfg_1/flask_tienda:latest"
 
