@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted  # Cambiado a un runner en tu red local
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Check out code
@@ -35,7 +35,7 @@ jobs:
           docker push ghcr.io/${{ github.repository }}/flask_tienda:latest
 
   deploy:
-    runs-on: self-hosted  # Cambiado a un runner en tu red local
+    runs-on: ubuntu-24.04
     needs: build
 
     steps:
