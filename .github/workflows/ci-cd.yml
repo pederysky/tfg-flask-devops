@@ -88,5 +88,8 @@ jobs:
             --namespace monitoring --create-namespace \
             -f helm/prometheus/values.yaml
 
-
-
+      - name: Deploy ELK Stack
+        run: |
+          kubectl apply -f k8s/elk/
+          kubectl rollout status deployment elk-stack -n logging
+          kubectl get pods -n logging
