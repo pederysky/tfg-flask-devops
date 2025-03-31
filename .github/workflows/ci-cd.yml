@@ -88,8 +88,13 @@ jobs:
             --namespace monitoring --create-namespace \
             -f helm/prometheus/values.yaml
 
+      - name: Create logging namespace
+        run: |
+          kubectl create namespace logging || echo "Namespace 'logging' already exists"
+      
       - name: Deploy ELK Stack
         run: |
-          kubectl apply -f k8s/elk/
+          kubectl apply -f k8s/elk/ -n logging
           kubectl rollout status deployment elk-stack -n logging
           kubectl get pods -n logging
+
