@@ -19,4 +19,4 @@ spec:
             - containerPort: 5601
           env:
             - name: ELASTICSEARCH_HOST
-              value: "elasticsearch-service:9200"
+              value: "elasticsearch:9200"
