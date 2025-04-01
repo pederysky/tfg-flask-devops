@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: elasticsearch-pvc
-  namespace: logging
+  namespace: default
 spec:
   accessModes:
     - ReadWriteOnce
