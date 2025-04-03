@@ -29,15 +29,11 @@ jobs:
       - name: Push Docker image to GHCR
         run: docker push ghcr.io/pederysky/tfg_1/flask_tienda:latest
 
-
   deploy:
     runs-on: self-hosted
     needs: build
 
     steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
       - name: Install kubectl
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -49,68 +45,56 @@ jobs:
           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
           chmod +x get_helm.sh
           ./get_helm.sh
-          echo "export PATH=/usr/local/bin:\$PATH" >> ~/.bashrc
-          echo "export PATH=/usr/local/bin:\$PATH" >> ~/.profile
           echo "export PATH=/usr/local/bin:\$PATH" >> $GITHUB_ENV
-          source ~/.bashrc
-          helm version
       
       - name: Configure kubeconfig
         run: |
           mkdir -p $HOME/.kube
           echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
-          export KUBECONFIG=$HOME/.kube/config
           echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
-      
+
       - name: Debug kubectl config
         run: |
           echo "Verificando configuración de kubectl..."
           kubectl config view
           kubectl config current-context
-          kubectl get nodes
-      
+          kubectl get nodes || { echo "Error: Kubernetes no está accesible"; exit 1; }
+
       - name: Deploy Flask App
         run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
-      
+          kubectl apply -f k8s/deployment.yaml || { echo "Error en deployment"; exit 1; }
+          kubectl apply -f k8s/service.yaml || { echo "Error en service"; exit 1; }
+
       - name: Deploy Grafana with Helm
         run: |
           helm upgrade --install grafana grafana \
             --repo https://grafana.github.io/helm-charts \
             --namespace monitoring --create-namespace \
-            -f helm/grafana/values.yaml
-      
+            -f helm/grafana/values.yaml || { echo "Error en despliegue de Grafana"; exit 1; }
+
       - name: Deploy Prometheus with Helm
         run: |
           helm upgrade --install prometheus prometheus \
             --repo https://prometheus-community.github.io/helm-charts \
             --namespace monitoring --create-namespace \
-            -f helm/prometheus/values.yaml
+            -f helm/prometheus/values.yaml || { echo "Error en despliegue de Prometheus"; exit 1; }
 
       - name: Create logging namespace
         run: |
-          kubectl create namespace logging || echo "Namespace 'logging' already exists"
-      
+          kubectl create namespace logging || echo "Namespace 'logging' ya existe"
+
       - name: Deploy ELK Stack
         run: |
-          # Desplegar Elasticsearch
-          kubectl apply -f k8s/elk/deployment.yaml -n logging
+          kubectl apply -f k8s/elk/deployment.yaml -n logging || { echo "Error en Elasticsearch"; exit 1; }
           kubectl apply -f k8s/elk/service.yaml -n logging
           kubectl apply -f k8s/elk/elasticsearch-pvc.yaml -n logging
-
-          # Desplegar Kibana
-          kubectl apply -f k8s/elk/deployment-kibana.yaml -n logging
+          kubectl apply -f k8s/elk/deployment-kibana.yaml -n logging || { echo "Error en Kibana"; exit 1; }
           kubectl apply -f k8s/elk/service-kibana.yaml -n logging
-
-          # Desplegar Logstash
-          kubectl apply -f k8s/elk/deployment-logstash.yaml -n logging
+          kubectl apply -f k8s/elk/deployment-logstash.yaml -n logging || { echo "Error en Logstash"; exit 1; }
           kubectl apply -f k8s/elk/service-logstash.yaml -n logging
 
       - name: Check the status of pods
-        run: |
-          kubectl get pods -n logging
+        run: kubectl get pods -n logging
 
       - name: Check the status of services
-        run: |
-          kubectl get services -n logging
+        run: kubectl get services -n logging
