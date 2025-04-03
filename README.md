@@ -47,7 +47,7 @@ tfg_1/
 ├── deploy.sh                           # Script para automatizar el despliegue de la app y ELK
 └── README.md                           # Descripción del proyecto
 
-
+```
 ### Despliegue Local
 
 Para desplegar la aplicación en un entorno local, ejecute el siguiente script:
