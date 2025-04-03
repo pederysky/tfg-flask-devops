@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Definir las variables
+# Definir variables
 GHCR_SERVER="ghcr.io"
 GHCR_USERNAME="pederysky"
 GHCR_PASSWORD="Aqui va el GHCR_TOKEN"
@@ -27,7 +27,7 @@ kubectl get secrets github-registry-secret
 echo "Iniciando sesión en GHCR..."
 echo $GHCR_PASSWORD | docker login $GHCR_SERVER -u $GHCR_USERNAME --password-stdin
 
-# Construir la imagen de Docker si no existe
+# Construir la imagen de Docker
 echo "Construyendo imagen de Docker..."
 docker build -t $IMAGE_NAME .
 
@@ -35,14 +35,28 @@ docker build -t $IMAGE_NAME .
 echo "Subiendo imagen a GHCR..."
 docker push $IMAGE_NAME
 
-# Aplicar la configuración de Kubernetes (Deployment y Service)
-echo "Aplicando Deployment y Service..."
+# Aplicar la configuración de Kubernetes para la aplicación Flask
+echo "Aplicando Deployment y Service para Flask App..."
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 
-# Exponer el servicio en Minikube
-echo "Exponiendo el servicio en Minikube..."
-minikube service flask-tienda-service
+# Aplicar la configuración de Prometheus
+echo "Aplicando configuración de Prometheus..."
+helm upgrade --install prometheus helm/prometheus --values helm/prometheus/values.yaml
+
+# Aplicar la configuración de Grafana
+echo "Aplicando configuración de Grafana..."
+helm upgrade --install grafana helm/grafana --values helm/grafana/values.yaml
+
+# Aplicar la configuración de Kubernetes para ELK (Elasticsearch, Logstash y Kibana)
+echo "Aplicando Deployment y Service para ELK..."
+kubectl apply -f k8s/elk/deployment.yaml
+kubectl apply -f k8s/elk/service.yaml
+kubectl apply -f k8s/elk/elasticsearch-pvc.yaml
+kubectl apply -f k8s/elk/deployment-logstash.yaml
+kubectl apply -f k8s/elk/service-logstash.yaml
+kubectl apply -f k8s/elk/deployment-kibana.yaml
+kubectl apply -f k8s/elk/service-kibana.yaml
 
 # Verificar el estado de los pods
 echo "Verificando los pods..."
@@ -52,6 +66,8 @@ kubectl get pods
 echo "Verificando los servicios..."
 kubectl get services
 
-# Exponer el servicio en Minikube nuevamente
-echo "Exponiendo el servicio en Minikube nuevamente..."
+# Exponer los servicios en Minikube
+echo "Exponiendo servicios en Minikube..."
 minikube service flask-tienda-service
+minikube service grafana
+minikube service prometheus
