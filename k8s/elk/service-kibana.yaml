@@ -3,7 +3,10 @@ kind: Service
 metadata:
   name: kibana-service
 spec:
+  type: NodePort
   ports:
     - port: 5601
+      targetPort: 5601
+      nodePort: 30004
   selector:
     app: kibana
