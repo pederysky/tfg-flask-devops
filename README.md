@@ -48,10 +48,30 @@ tfg_1/
 └── README.md                           # Descripción del proyecto
 
 ```
-### Despliegue Local
+Configuración de Auto Runner en GitHub y Creación de Secretos en Kubernetes
+Introducción
+Este documento proporciona instrucciones para configurar un auto runner en GitHub y crear un secreto de registro de Docker en Kubernetes.
 
-Para desplegar la aplicación en un entorno local, ejecute el siguiente script:
+Configuración del Auto Runner en GitHub
+Paso 1: Crear un Nuevo Auto Runner
+En GitHub, navega a la página principal del repositorio.
+Haz clic en Configuración.
+En la barra lateral izquierda, haz clic en Acciones y luego en Ejecutores.
+Haz clic en Nuevo ejecutor auto-hospedado.
+Sigue las instrucciones para descargar y configurar el ejecutor en tu máquina.
+Paso 2: Registrar el Auto Runner
+Ejecuta el script proporcionado por GitHub para registrar el ejecutor.
+Verifica que el ejecutor esté registrado correctamente en la sección de ejecutores del repositorio.
+Creación de Secretos en Kubernetes
+Paso 1: Crear el Secreto de Registro de Docker
+Ejecuta el siguiente comando para crear un secreto de registro de Docker:
 
-```bash
-./deploy_flask_tienda.sh
+kubectl create secret docker-registry github-registry-secret \
+  --docker-server=ghcr.io \
+  --docker-username=pederysky \
+  --docker-password="GHCR_TOKEN" \
+  --docker-email=pedroegeaortega@gmail.com
+Paso 2: Verificar el Secreto
+Ejecuta el siguiente comando para verificar que el secreto se haya creado correctamente:
 
+kubectl get secrets github-registry-secret
