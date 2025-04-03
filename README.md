@@ -4,10 +4,47 @@ Este proyecto implementa un sistema de Integración y Despliegue Continuo (CI/CD
 
 ## Estructura del Proyecto
 
-- **aplicacion/**: Contiene el código fuente de la aplicación.&#8203;:contentReference[oaicite:2]{index=2}
-- **helm/**: :contentReference[oaicite:3]{index=3}&#8203;:contentReference[oaicite:4]{index=4}
-- **k8s/**: :contentReference[oaicite:5]{index=5}&#8203;:contentReference[oaicite:6]{index=6}
-- **.github/workflows/**: :contentReference[oaicite:7]{index=7}&#8203;:contentReference[oaicite:8]{index=8}
+tfg_1/
+├── aplicacion/
+│   ├── app.py                         # Tu aplicación Flask principal
+│   ├── config.py                      # Configuración de la app Flask
+│   ├── forms.py                       # Formulario de la aplicación
+│   ├── inicializacion_datos.py        # Inicialización de datos de la app
+│   ├── __init__.py                    # Inicialización del módulo Flask
+│   ├── login.py                       # Funcionalidad de login
+│   ├── models.py                       # Modelos de base de datos
+│   ├── static/                         # Archivos estáticos
+│   │   ├── css/
+│   │   │   └── style.css
+│   │   └── upload/
+│   │       └── [archivos de imágenes]
+│   └── templates/                      # Plantillas HTML
+│       └── [plantillas de la app]
+├── Dockerfile                          # Dockerfile para contenerizar la app
+├── .dockerignore                       # Archivos a excluir del contenedor Docker
+├── requirements.txt                    # Dependencias de la app Flask
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml                    # Workflow de GitHub Actions
+├── k8s/
+│   ├── deployment.yaml                 # Configuración de Kubernetes para desplegar la app
+│   ├── service.yaml                    # Configuración de servicio en Kubernetes
+│   ├── prometheus-flask-exporter.yaml  # Configuración de Kubernetes para el exporter de métricas Flask
+│   └── elk/
+│       ├── deployment.yaml             # Despliegue de Elasticsearch, Kibana y Logstash
+│       ├── service.yaml                # Servicios de Elasticsearch, Kibana y Logstash
+│       ├── elasticsearch-pvc.yaml      # PersistentVolumeClaim para Elasticsearch
+│       ├── deployment-logstash.yaml    # Despliegue de Logstash
+│       ├── service-logstash.yaml       # Servicio de Logstash
+│       ├── deployment-kibana.yaml      # Despliegue de Kibana
+│       ├── service-kibana.yaml         # Servicio de Kibana
+├── helm/
+│   ├── prometheus/
+│   │   └── values.yaml                 # Configuración de Helm para Prometheus
+│   ├── grafana/
+│   │   └── values.yaml                 # Configuración de Helm para Grafana
+├── deploy.sh                           # Script para automatizar el despliegue de la app y ELK
+└── README.md                           # Descripción del proyecto
 
 ## Despliegue Local
 
