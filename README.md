@@ -50,6 +50,17 @@ tfg_1/
 ```
 ## Configuración de Self-hosted Runner en GitHub y Creación de Secretos en Kubernetes
 
+### Creación del Secreto GHCR_TOKEN
+El secreto GHCR_TOKEN se utiliza para autenticar el acceso al GitHub Container Registry (GHCR). Para crear este secreto, sigue estos pasos:
+
+#### Generar un Token de Acceso Personal en GitHub:
+
+Ve a GitHub y accede a tu cuenta.
+Navega a Configuración (Settings) > Configuración de desarrollador (Developer settings) > Tokens de acceso personal (Personal access tokens).
+Haz clic en Generar nuevo token (Generate new token).
+Asigna un nombre al token y selecciona el permiso read:packages.
+Genera el token y cópialo.
+
 ### Configuración del Self-hosted Runner en GitHub
 #### Paso 1: Crear un Nuevo Self-hosted Runner
 En GitHub, navega a la página principal del repositorio.
@@ -66,7 +77,7 @@ Ejecuta el siguiente comando para crear un secreto de registro de Docker:
 ```bash
 kubectl create secret docker-registry github-registry-secret \
   --docker-server=ghcr.io \
-  --docker-username="USER" \
+  --docker-username="GITHUB_USER" \
   --docker-password="GHCR_TOKEN" \
   --docker-email="EMAIL"
 ```
@@ -76,3 +87,16 @@ Ejecuta el siguiente comando para verificar que el secreto se haya creado correc
 ```bash
 kubectl get secrets github-registry-secret
 ```
+### Creación de Secretos en GitHub
+#### Paso 1: Navegar a la Configuración del Repositorio
+En GitHub, ve a la página principal de tu repositorio.
+Haz clic en Configuración (Settings).
+#### Paso 2: Acceder a la Sección de Secretos
+En la barra lateral izquierda, haz clic en Seguridad (Security).
+Selecciona Secretos y variables (Secrets and variables) y luego Acciones (Actions).
+#### Paso 3: Crear un Nuevo Secreto
+Haz clic en Nuevo secreto de repositorio (New repository secret).
+En el campo Nombre (Name), escribe el nombre del secreto (GHCR_TOKEN o KUBE_CONFIG).
+En el campo Secreto (Secret), ingresa el valor del secreto.
+#### Paso 4: Guardar el Secreto
+Haz clic en Agregar secreto (Add secret).
