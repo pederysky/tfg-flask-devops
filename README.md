@@ -48,7 +48,7 @@ tfg_1/
 └── README.md                           # Descripción del proyecto
 
 
-## Despliegue Local
+### Despliegue Local
 
 Para desplegar la aplicación en un entorno local, ejecute el siguiente script:
 
