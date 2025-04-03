@@ -48,9 +48,7 @@ tfg_1/
 └── README.md                           # Descripción del proyecto
 
 ```
-### Configuración de Auto Runner en GitHub y Creación de Secretos en Kubernetes
-Introducción
-Este documento proporciona instrucciones para configurar un auto runner en GitHub y crear un secreto de registro de Docker en Kubernetes.
+## Configuración de Auto Runner en GitHub y Creación de Secretos en Kubernetes
 
 Configuración del Auto Runner en GitHub
 Paso 1: Crear un Nuevo Auto Runner
@@ -65,13 +63,16 @@ Verifica que el ejecutor esté registrado correctamente en la sección de ejecut
 Creación de Secretos en Kubernetes
 Paso 1: Crear el Secreto de Registro de Docker
 Ejecuta el siguiente comando para crear un secreto de registro de Docker:
-
+```bash
 kubectl create secret docker-registry github-registry-secret \
   --docker-server=ghcr.io \
   --docker-username=pederysky \
   --docker-password="GHCR_TOKEN" \
   --docker-email=pedroegeaortega@gmail.com
+```
 Paso 2: Verificar el Secreto
 Ejecuta el siguiente comando para verificar que el secreto se haya creado correctamente:
 
+```bash
 kubectl get secrets github-registry-secret
+```
