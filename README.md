@@ -55,5 +55,3 @@ Para desplegar la aplicación en un entorno local, ejecute el siguiente script:
 ```bash
 ./deploy_flask_tienda.sh
 
-```
-https://roadmap.sh/projects/monitoring
