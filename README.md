@@ -61,6 +61,17 @@ El secreto GHCR_TOKEN se utiliza para autenticar el acceso al GitHub Container R
 ##### Asigna un nombre al token y selecciona el permiso read:packages.
 ##### Genera el token y cópialo.
 
+### Creación del Secreto KUBE_CONFIG
+El secreto KUBE_CONFIG se utiliza para almacenar la configuración de acceso a tu clúster de Kubernetes. Para crear este secreto, sigue estos pasos:
+
+#### Obtener el Archivo de Configuración de Kubernetes:
+
+##### Ejecuta en tu consola:
+```bash
+cp ~/.kube/config kubeconfig.yaml
+cat kubeconfig.yaml
+```
+
 ### Configuración del Self-hosted Runner en GitHub
 #### Paso 1: Crear un Nuevo Self-hosted Runner
 En GitHub, navega a la página principal del repositorio.
@@ -70,7 +81,7 @@ Haz clic en New Self-hosted runner.
 Sigue las instrucciones para descargar y configurar el ejecutor en tu máquina.
 #### Paso 2: Registrar el Self-hosted Runner
 Ejecuta el script proporcionado por GitHub para registrar el ejecutor.
-### Verifica que el ejecutor esté registrado correctamente en la sección de ejecutores del repositorio.
+### Verifica que el self-hosted runner esté registrado correctamente en la sección de runners del repositorio.
 Creación de Secretos en Kubernetes
 #### Paso 1: Crear el Secreto de Registro de Docker
 Ejecuta el siguiente comando para crear un secreto de registro de Docker:
