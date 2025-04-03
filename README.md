@@ -1,6 +1,8 @@
 # Implantación de un sistema CI/CD para una aplicación basada en contenedores.
 
 Este proyecto implementa un sistema de Integración y Despliegue Continuo (CI/CD) para una aplicación basada en contenedores.
+## Requisitos previos
+Para poder realizar el despliegue en tu pc, se necesita Docker, Docker-Compose, Kubernetes y Minikube. Ejecuta el script check_pre-requisites.sh para verificar si lo tienes todo disponible.
 
 ## Estructura del Proyecto
 
