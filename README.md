@@ -48,7 +48,7 @@ tfg_1/
 └── README.md                           # Descripción del proyecto
 
 ```
-Configuración de Auto Runner en GitHub y Creación de Secretos en Kubernetes
+### Configuración de Auto Runner en GitHub y Creación de Secretos en Kubernetes
 Introducción
 Este documento proporciona instrucciones para configurar un auto runner en GitHub y crear un secreto de registro de Docker en Kubernetes.
 
