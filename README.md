@@ -55,8 +55,8 @@ El secreto GHCR_TOKEN se utiliza para autenticar el acceso al GitHub Container R
 
 #### Generar un Token de Acceso Personal en GitHub:
 
-Ve a GitHub y accede a tu cuenta.
-Navega a Configuración (Settings) > Configuración de desarrollador (Developer settings) > Tokens de acceso personal (Personal access tokens).
+Ve a GitHub y accede a tu cuenta./n
+Navega a Configuración (Settings) > Configuración de desarrollador (Developer settings) > Tokens de acceso personal (Personal access tokens)./n
 Haz clic en Generar nuevo token (Generate new token).
 Asigna un nombre al token y selecciona el permiso read:packages.
 Genera el token y cópialo.
