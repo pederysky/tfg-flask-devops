@@ -48,16 +48,16 @@ tfg_1/
 └── README.md                           # Descripción del proyecto
 
 ```
-## Configuración de Auto Runner en GitHub y Creación de Secretos en Kubernetes
+## Configuración de Self-hosted Runner en GitHub y Creación de Secretos en Kubernetes
 
-### Configuración del Auto Runner en GitHub
-#### Paso 1: Crear un Nuevo Auto Runner
+### Configuración del Self-hosted Runner en GitHub
+#### Paso 1: Crear un Nuevo Self-hosted Runner
 En GitHub, navega a la página principal del repositorio.
 Haz clic en Configuración.
-En la barra lateral izquierda, haz clic en Acciones y luego en Ejecutores.
-Haz clic en Nuevo ejecutor auto-hospedado.
+En la barra lateral izquierda, haz clic en Actions y luego en Runners.
+Haz clic en New Self-hosted runner.
 Sigue las instrucciones para descargar y configurar el ejecutor en tu máquina.
-#### Paso 2: Registrar el Auto Runner
+#### Paso 2: Registrar el Self-hosted Runner
 Ejecuta el script proporcionado por GitHub para registrar el ejecutor.
 ### Verifica que el ejecutor esté registrado correctamente en la sección de ejecutores del repositorio.
 Creación de Secretos en Kubernetes
@@ -66,9 +66,9 @@ Ejecuta el siguiente comando para crear un secreto de registro de Docker:
 ```bash
 kubectl create secret docker-registry github-registry-secret \
   --docker-server=ghcr.io \
-  --docker-username=pederysky \
+  --docker-username="USER" \
   --docker-password="GHCR_TOKEN" \
-  --docker-email=pedroegeaortega@gmail.com
+  --docker-email="EMAIL"
 ```
 Paso 2: Verificar el Secreto
 Ejecuta el siguiente comando para verificar que el secreto se haya creado correctamente:
