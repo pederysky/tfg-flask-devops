@@ -4,6 +4,7 @@ Este proyecto implementa un sistema de Integración y Despliegue Continuo (CI/CD
 
 ## Estructura del Proyecto
 
+```bash
 tfg_1/
 ├── aplicacion/
 │   ├── app.py                         # Tu aplicación Flask principal
@@ -12,7 +13,7 @@ tfg_1/
 │   ├── inicializacion_datos.py        # Inicialización de datos de la app
 │   ├── __init__.py                    # Inicialización del módulo Flask
 │   ├── login.py                       # Funcionalidad de login
-│   ├── models.py                       # Modelos de base de datos
+│   ├── models.py                      # Modelos de base de datos
 │   ├── static/                         # Archivos estáticos
 │   │   ├── css/
 │   │   │   └── style.css
@@ -45,6 +46,7 @@ tfg_1/
 │   │   └── values.yaml                 # Configuración de Helm para Grafana
 ├── deploy.sh                           # Script para automatizar el despliegue de la app y ELK
 └── README.md                           # Descripción del proyecto
+
 
 ## Despliegue Local
 
