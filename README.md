@@ -1,8 +1,38 @@
 # Implantación de un sistema CI/CD para una aplicación basada en contenedores.
 
-Este proyecto implementa un sistema de Integración y Despliegue Continuo (CI/CD) para una aplicación basada en contenedores.
+Este proyecto forma parte de mi Trabajo de Fin de Grado (TFG) y tiene como objetivo diseñar e implantar un sistema completo de Integración y Despliegue Continuo (CI/CD) para una aplicación web desarrollada con Flask. 
+
+La aplicación y su infraestructura se ejecutan en contenedores Docker y se despliegan en un clúster de Kubernetes utilizando Minikube. Además, se han incorporado herramientas de monitorización (Prometheus, Grafana) y observabilidad (ELK Stack) para asegurar la trazabilidad y supervisión del sistema.
+
 ## Requisitos previos
-Para poder realizar el despliegue en tu pc, se necesita Docker, Docker-Compose, Kubernetes y Minikube. Ejecuta el script check_pre-requisites.sh para verificar si lo tienes todo disponible.
+
+Para poder desplegar correctamente este proyecto en tu entorno local, necesitas tener instaladas las siguientes herramientas:
+
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Kubernetes](https://kubernetes.io/)
+- [Minikube](https://minikube.sigs.k8s.io/)
+
+Ejecuta el script `check_pre-requisites.sh` incluido en este repositorio para verificar que todo está correctamente instalado.
+
+### Requisitos mínimos del sistema
+
+Además, la máquina host debe cumplir con los siguientes requisitos mínimos (recomendados para ejecutar Minikube con Kubernetes y los contenedores del proyecto):
+
+- **CPU:** 2 núcleos
+- **Memoria RAM:** 4 GB (mínimo), idealmente 6–8 GB
+- **Almacenamiento:** 25 GB libres
+
+
+## Tecnologías y herramientas utilizadas
+
+- **Flask** — Aplicación web principal
+- **Docker / Docker Compose** — Contenerización
+- **Kubernetes / Minikube** — Orquestación de contenedores
+- **GitHub Actions** — Integración y despliegue continuo
+- **Prometheus + Grafana** — Monitorización de métricas
+- **ELK Stack (Elasticsearch, Logstash, Kibana)** — Observabilidad y análisis de logs
+
 
 ## Estructura del Proyecto
 
