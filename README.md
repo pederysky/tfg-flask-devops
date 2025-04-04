@@ -93,7 +93,7 @@ El secret GHCR_TOKEN se utiliza para autenticar el acceso al GitHub Container Re
 ##### Asigna un nombre al token y selecciona el permiso read:packages.
 ##### Genera el token y cópialo.
 
-### Creación del Secreto KUBE_CONFIG
+### Creación del Secret KUBE_CONFIG
 El secret KUBE_CONFIG se utiliza para almacenar la configuración de acceso a tu clúster de Kubernetes.
 
 #### Obtener el Archivo de Configuración de Kubernetes:
