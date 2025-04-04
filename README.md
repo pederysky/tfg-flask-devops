@@ -37,7 +37,7 @@ Además, la máquina host debe cumplir con los siguientes requisitos mínimos (r
 ## Estructura del Proyecto
 
 ```bash
-tfg_1/
+tfg-flask-devops/
 ├── aplicacion/
 │   ├── app.py                         # Tu aplicación Flask principal
 │   ├── config.py                      # Configuración de la app Flask
@@ -80,10 +80,10 @@ tfg_1/
 └── README.md                           # Descripción del proyecto
 
 ```
-## Configuración de Self-hosted Runner en GitHub y Creación de Secretos en Kubernetes
+## Configuración de Self-hosted Runner en GitHub y Creación de Secrets en Kubernetes
 
-### Creación del Secreto GHCR_TOKEN
-El secreto GHCR_TOKEN se utiliza para autenticar el acceso al GitHub Container Registry (GHCR). Para crear este secreto, sigue estos pasos:
+### Creación del Secret GHCR_TOKEN
+El secret GHCR_TOKEN se utiliza para autenticar el acceso al GitHub Container Registry (GHCR). Para crear este secret, sigue estos pasos:
 
 #### Generar un Token de Acceso Personal en GitHub:
 
@@ -94,7 +94,7 @@ El secreto GHCR_TOKEN se utiliza para autenticar el acceso al GitHub Container R
 ##### Genera el token y cópialo.
 
 ### Creación del Secreto KUBE_CONFIG
-El secreto KUBE_CONFIG se utiliza para almacenar la configuración de acceso a tu clúster de Kubernetes.
+El secret KUBE_CONFIG se utiliza para almacenar la configuración de acceso a tu clúster de Kubernetes.
 
 #### Obtener el Archivo de Configuración de Kubernetes:
 
@@ -124,22 +124,22 @@ kubectl create secret docker-registry github-registry-secret \
   --docker-password="GHCR_TOKEN" \
   --docker-email="EMAIL"
 ```
-Paso 2: Verificar el Secreto
-Ejecuta el siguiente comando para verificar que el secreto se haya creado correctamente:
+Paso 2: Verificar el Secret
+Ejecuta el siguiente comando para verificar que el secret se haya creado correctamente:
 
 ```bash
 kubectl get secrets github-registry-secret
 ```
-### Creación de Secretos en GitHub
+### Creación de Secrets en GitHub
 #### Paso 1: Navegar a la Configuración del Repositorio
 En GitHub, ve a la página principal de tu repositorio.
 Haz clic en Configuración (Settings).
-#### Paso 2: Acceder a la Sección de Secretos
+#### Paso 2: Acceder a la Sección de Secrets
 En la barra lateral izquierda, haz clic en Seguridad (Security).
 Selecciona Secretos y variables (Secrets and variables) y luego Acciones (Actions).
-#### Paso 3: Crear un Nuevo Secreto
+#### Paso 3: Crear un New Secret
 Haz clic en Nuevo secreto de repositorio (New repository secret).
 En el campo Nombre (Name), escribe el nombre del secreto (GHCR_TOKEN o KUBE_CONFIG).
 En el campo Secreto (Secret), ingresa el valor del secreto.
-#### Paso 4: Guardar el Secreto
+#### Paso 4: Guardar el Secret
 Haz clic en Agregar secreto (Add secret).
