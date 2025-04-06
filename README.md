@@ -76,7 +76,7 @@ tfg-flask-devops/
 │   │   └── values.yaml                 # Configuración de Helm para Prometheus
 │   ├── grafana/
 │   │   └── values.yaml                 # Configuración de Helm para Grafana
-├── deploy.sh                           # Script para automatizar el despliegue de la app y ELK
+├── check_pre-requisites.sh             # Script para comprobar si tu máquina puede desplegar el proyecto
 └── README.md                           # Descripción del proyecto
 
 ```
