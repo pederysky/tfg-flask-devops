@@ -92,12 +92,6 @@ jobs:
           kubectl apply -f k8s/elk/service-kibana.yaml -n logging
           kubectl apply -f k8s/elk/deployment-logstash.yaml -n logging || { echo "Error en Logstash"; exit 1; }
           kubectl apply -f k8s/elk/service-logstash.yaml -n logging
-
-      - name: Check the status of pods
-        run: kubectl get pods -n logging
-
-      - name: Check the status of services
-        run: kubectl get services -n logging
       
       - name: Restart Flask deployment
         run: kubectl rollout restart deployment flask-tienda
