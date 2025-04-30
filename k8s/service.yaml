@@ -7,7 +7,7 @@ spec:
     app: flask-tienda
   ports:
     - protocol: TCP
-      port: 80      # Puerto interno del contenedor (si es diferente de 80, cámbialo)
+      port: 80      # Puerto interno del contenedor
       targetPort: 5000  # Puerto donde Flask está escuchando
-      nodePort: 30001   # Puerto en el nodo (puedes elegir otro número de puerto)
+      nodePort: 30001   # Puerto en el nodo
   type: NodePort
