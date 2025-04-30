@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: flask-tienda
-          image: ghcr.io/pederysky/tfg_1/flask_tienda:latest
+          image: ghcr.io/pederysky/tfg-flask-devops/flask_tienda:latest
           ports:
             - containerPort: 5000
       imagePullSecrets:
