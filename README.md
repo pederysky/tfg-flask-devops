@@ -78,6 +78,7 @@ tfg-flask-devops/
 │   │   └── values.yaml                 # Configuración de Helm para Grafana
 ├── check_pre-requisites.sh             # Script para comprobar si tu máquina puede desplegar el proyecto
 └── README.md                           # Descripción del proyecto
+└── memoria.pdf                         # Memoria del proyecto
 
 ```
 ## Configuración de Self-hosted Runner en GitHub y Creación de Secrets en Kubernetes
@@ -143,3 +144,6 @@ En el campo Nombre (Name), escribe el nombre del secreto (GHCR_TOKEN o KUBE_CONF
 En el campo Secreto (Secret), ingresa el valor del secreto.
 #### Paso 4: Guardar el Secret
 Haz clic en Agregar secreto (Add secret).
+
+## Enlace al video demostración
+https://www.youtube.com/watch?v=bK3Z4MMksrk
